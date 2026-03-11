@@ -3,114 +3,489 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plani — Your peaceful daily companion</title>
-  <meta name="description" content="Organize your day by life areas. Track habits, close your rings, and find balance — not just productivity.">
+  <title>Plani — Plan your day around real life</title>
+  <meta name="description" content="Tasks, habits, calendar and life balance — all in one clear daily view. Know what to do, when to do it, and stay balanced.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪷</text></svg>">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Plani — Your peaceful daily companion">
-  <meta property="og:description" content="Organize your day by life areas. Track habits, close your rings, and find balance — not just productivity.">
+  <meta property="og:title" content="Plani — Plan your day around real life">
+  <meta property="og:description" content="Tasks, habits, calendar and life balance — all in one clear daily view. Know what to do, when to do it, and stay balanced.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://plani.life/">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Plani — Your peaceful daily companion">
-  <meta name="twitter:description" content="Organize your day by life areas. Track habits, close your rings, and find balance — not just productivity.">
+  <meta name="twitter:title" content="Plani — Plan your day around real life">
+  <meta name="twitter:description" content="Tasks, habits, calendar and life balance — all in one clear daily view.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       color: #1a1a2e;
-      background: linear-gradient(180deg, #E6F4FE 0%, #F8FBFF 50%, #FFFFFF 100%);
+      background: #ffffff;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── Hero ── */
+    .hero {
       min-height: 100vh;
-    }
-    .container {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 60px 24px;
-      text-align: center;
-    }
-    .emoji { font-size: 64px; margin-bottom: 16px; }
-    h1 {
-      font-size: 40px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      margin-bottom: 8px;
-    }
-    .subtitle {
-      font-size: 18px;
-      color: #6b7280;
-      margin-bottom: 48px;
-    }
-    .features {
       display: flex;
       flex-direction: column;
-      gap: 24px;
-      margin-bottom: 48px;
-      text-align: left;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 48px 24px;
+      position: relative;
+      background: radial-gradient(ellipse at 50% 0%, #dbeafe 0%, #f0f7ff 40%, #ffffff 70%);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, #ffffff);
+    }
+
+    .hero-logo {
+      font-size: 80px;
+      margin-bottom: 28px;
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #3b5998 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-tagline {
+      font-size: 24px;
+      font-weight: 500;
+      color: #4b5563;
+      margin-bottom: 16px;
+    }
+    .hero-desc {
+      font-size: 17px;
+      color: #9ca3af;
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 36px;
+      background: #1a1a2e;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 14px;
+      text-decoration: none;
+      transition: all 0.25s;
+      box-shadow: 0 4px 24px rgba(26, 26, 46, 0.15);
+    }
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(26, 26, 46, 0.25);
+    }
+    span.cta { cursor: default; }
+
+    /* ── Section ── */
+    section { position: relative; z-index: 1; }
+
+    .section-label {
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #93a0f5;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    .section-subtitle {
+      text-align: center;
+      font-size: 17px;
+      color: #6b7280;
+      max-width: 520px;
+      margin: 0 auto 56px;
+      line-height: 1.6;
+    }
+
+    /* ── How it works ── */
+    .how {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 100px 24px;
+    }
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .how-step {
+      text-align: center;
+      padding: 40px 28px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, #f8faff 0%, #ffffff 100%);
+      border: 1px solid #eef1f6;
+      transition: transform 0.2s;
+    }
+    .how-step:hover { transform: translateY(-4px); }
+    .how-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: #e8ecfb;
+      color: #4a58a5;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .how-step h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .how-step p {
+      font-size: 15px;
+      color: #6b7280;
+      line-height: 1.6;
+    }
+
+    /* ── Features ── */
+    .features {
+      padding: 100px 24px;
+      background: linear-gradient(180deg, #ffffff 0%, #f7f8fc 100%);
+    }
+    .features-grid {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
     }
     .feature {
-      background: rgba(255,255,255,0.7);
-      border-radius: 16px;
-      padding: 24px;
-      border: 1px solid #e5e7eb;
+      padding: 36px 32px;
+      border-radius: 24px;
+      background: #ffffff;
+      border: 1px solid #eef1f6;
+      transition: all 0.25s;
     }
-    .feature-icon { font-size: 28px; margin-bottom: 8px; }
-    .feature h3 { font-size: 17px; font-weight: 600; margin-bottom: 4px; }
-    .feature p { font-size: 15px; color: #6b7280; line-height: 1.5; }
+    .feature:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+    }
+    .feature-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      font-size: 26px;
+      margin-bottom: 16px;
+    }
+    .feature-icon-blue { background: #dbeafe; }
+    .feature-icon-green { background: #d1fae5; }
+    .feature-icon-purple { background: #e8e0fb; }
+    .feature-icon-orange { background: #ffedd5; }
+    .feature h3 {
+      font-size: 19px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .feature p {
+      font-size: 15px;
+      color: #6b7280;
+      line-height: 1.65;
+    }
+    .feature-highlight {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+      padding: 44px 40px;
+      background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 100%);
+      border-color: #e0e4f0;
+    }
+    .feature-highlight-text h3 { font-size: 22px; margin-bottom: 10px; }
+    .feature-highlight-text p { font-size: 16px; }
+    .feature-highlight-visual {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+    .ring {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 5px solid;
+      opacity: 0.7;
+    }
+    .ring-1 { border-color: #60a5fa; width: 72px; height: 72px; }
+    .ring-2 { border-color: #34d399; width: 64px; height: 64px; align-self: flex-end; }
+    .ring-3 { border-color: #a78bfa; width: 56px; height: 56px; }
+    .ring-4 { border-color: #fb923c; width: 48px; height: 48px; align-self: flex-end; }
+
+    /* ── Preview ── */
+    .preview {
+      text-align: center;
+      padding: 80px 24px;
+    }
+    .preview-phone {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 280px;
+      height: 560px;
+      border-radius: 40px;
+      background: linear-gradient(180deg, #eef2ff 0%, #f5f3ff 50%, #fdf2f8 100%);
+      border: 3px solid #e2e5f0;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+      color: #737b91;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    /* ── Coming Soon ── */
     .coming-soon {
+      padding: 100px 24px;
+    }
+    .coming-soon-grid {
+      max-width: 800px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .coming-soon-card {
+      text-align: center;
+      padding: 32px 24px;
+      border-radius: 20px;
+      border: 1.5px dashed #d4d8e8;
+      background: #fafbfe;
+      transition: all 0.2s;
+    }
+    .coming-soon-card:hover {
+      border-color: #a5b0d6;
+      background: #f5f6fc;
+    }
+    .coming-soon-card .feature-icon { opacity: 0.5; margin-bottom: 12px; }
+    .coming-soon-card h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: #6b7280;
+      margin-bottom: 6px;
+    }
+    .coming-soon-card p {
       font-size: 14px;
       color: #9ca3af;
-      margin-top: 8px;
+      line-height: 1.55;
     }
+
+    /* ── CTA bottom ── */
+    .cta-bottom {
+      text-align: center;
+      padding: 80px 24px;
+      background: linear-gradient(180deg, #ffffff 0%, #f0f4ff 100%);
+    }
+    .cta-bottom h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+    .cta-bottom p {
+      font-size: 17px;
+      color: #6b7280;
+      margin-bottom: 32px;
+    }
+
+    /* ── Footer ── */
     footer {
-      margin-top: 64px;
-      padding-top: 24px;
-      border-top: 1px solid #e5e7eb;
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid #f0f0f5;
       font-size: 13px;
       color: #9ca3af;
     }
-    footer a { color: #6b7280; text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
     .footer-links { margin-bottom: 8px; }
-    .footer-links a { margin: 0 12px; }
+    .footer-links a {
+      color: #6b7280;
+      text-decoration: none;
+      margin: 0 14px;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: #1a1a2e; }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 40px; }
+      .hero-tagline { font-size: 20px; }
+      .section-title { font-size: 28px; }
+      .how-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      .features-grid { grid-template-columns: 1fr; }
+      .feature-highlight {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .coming-soon-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      .preview-phone { width: 240px; height: 480px; }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="emoji">🪷</div>
-    <h1>Plani</h1>
-    <p class="subtitle">Your peaceful daily companion</p>
 
-    <div class="features">
-      <div class="feature">
-        <div class="feature-icon">📅</div>
-        <h3>Organize tasks & habits</h3>
-        <p>Plan your day with tasks and build lasting habits — all in one place, sorted by life areas.</p>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-logo">🪷</div>
+    <h1>Plani</h1>
+    <p class="hero-tagline">Plan your day around real life.</p>
+    <p class="hero-desc">Tasks, habits and calendar come together in one clear view. Always know what to do, when to do it — and stay balanced.</p>
+    <span class="cta">Coming soon on iOS</span>
+  </section>
+
+  <!-- How it works -->
+  <section class="how">
+    <p class="section-label">How it works</p>
+    <h2 class="section-title">Your morning in 3 steps</h2>
+    <p class="section-subtitle">Open Plani and see your entire day — organized, balanced, and clear.</p>
+
+    <div class="how-grid">
+      <div class="how-step">
+        <div class="how-number">1</div>
+        <h3>See your day</h3>
+        <p>Tasks, habits and calendar events — all on one screen. Nothing hidden, nothing forgotten.</p>
       </div>
-      <div class="feature">
-        <div class="feature-icon">⚖️</div>
-        <h3>Stay balanced, not busy</h3>
-        <p>See when your day is out of balance. Small nudges to help you care for every part of your life.</p>
+      <div class="how-step">
+        <div class="how-number">2</div>
+        <h3>Know when</h3>
+        <p>Each task and habit has its place in your schedule. See free time and plan around what's real.</p>
       </div>
-      <div class="feature">
-        <div class="feature-icon">⭕</div>
-        <h3>Close your daily rings</h3>
-        <p>Each life area has a ring. Complete habits and tasks to fill them. A balanced day means all rings move forward.</p>
+      <div class="how-step">
+        <div class="how-number">3</div>
+        <h3>Stay balanced</h3>
+        <p>Balance rings show how your life areas are doing. Work, health, self care — all moving forward.</p>
       </div>
     </div>
+  </section>
 
-    <p class="coming-soon">Coming soon</p>
+  <!-- Features -->
+  <section class="features">
+    <p class="section-label">Features</p>
+    <h2 class="section-title">Everything in one day</h2>
+    <p class="section-subtitle">Not just another to-do app. Plani brings tasks, habits and your calendar together into a single daily view.</p>
 
-    <footer>
-      <div class="footer-links">
-        <a href="/privacy.html">Privacy Policy</a>
-        <a href="/terms.html">Terms of Use</a>
+    <div class="features-grid">
+      <div class="feature">
+        <div class="feature-icon feature-icon-blue">✔️</div>
+        <h3>Tasks &amp; lists</h3>
+        <p>Create tasks with deadlines, priorities and checklists. Organize by life area. See what matters today — and what can wait.</p>
       </div>
-      <p>&copy; 2026 Evgeniia Ocheredko. All rights reserved.</p>
-    </footer>
-  </div>
+      <div class="feature">
+        <div class="feature-icon feature-icon-green">🔁</div>
+        <h3>Habits</h3>
+        <p>Build daily routines that stick. Set schedules, track completions, use timers. Morning, afternoon or evening — your rhythm, your rules.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon feature-icon-purple">📅</div>
+        <h3>Calendar</h3>
+        <p>See your calendar events alongside tasks and habits. Find free time in your day and plan around what's already scheduled.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon feature-icon-orange">🏷️</div>
+        <h3>Life areas</h3>
+        <p>Organize everything by areas — work, health, personal, self care. Custom colors and icons. See where your time goes.</p>
+      </div>
+
+      <!-- Balance highlight -->
+      <div class="feature feature-highlight">
+        <div class="feature-highlight-text">
+          <h3>Balance rings</h3>
+          <p>Each life area has a ring. Complete tasks and habits to fill them. When all rings move forward — your day is balanced. Not just productive, but whole.</p>
+        </div>
+        <div class="feature-highlight-visual">
+          <div class="ring ring-1"></div>
+          <div class="ring ring-2"></div>
+          <div class="ring ring-3"></div>
+          <div class="ring ring-4"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preview -->
+  <section class="preview">
+    <div class="preview-phone">Screenshot coming soon</div>
+  </section>
+
+  <!-- Coming Soon -->
+  <section class="coming-soon">
+    <p class="section-label">Roadmap</p>
+    <h2 class="section-title">Coming soon</h2>
+    <p class="section-subtitle">What we're building next.</p>
+
+    <div class="coming-soon-grid">
+      <div class="coming-soon-card">
+        <div class="feature-icon">🧠</div>
+        <h3>Smart scheduling</h3>
+        <p>Suggestions on when to do things based on your day, energy and habits.</p>
+      </div>
+      <div class="coming-soon-card">
+        <div class="feature-icon">💬</div>
+        <h3>AI assistant</h3>
+        <p>A companion that learns your patterns and helps you plan smarter.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA bottom -->
+  <section class="cta-bottom">
+    <h2>Plan your real day.</h2>
+    <p>Not a perfect day. A balanced one.</p>
+    <span class="cta">Coming soon on iOS</span>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="index.html">Plani</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Use</a>
+      <a href="mailto:evgeniia.apps.dev@gmail.com">Contact</a>
+    </div>
+    <p>&copy; 2026 Plani. All rights reserved.</p>
+  </footer>
+
 </body>
 </html>
